@@ -5,6 +5,7 @@ import {
   deletePost,
   createPost,
 } from "../services/apiService";
+import { Link } from "react-router-dom";
 
 export default function PostComponent() {
   const [posts, setPosts] = useState([]);
@@ -21,11 +22,6 @@ export default function PostComponent() {
     // console.log(posts);
   };
 
-  const fetchPost = async (id) => {
-    const post = await detailPost(id);
-    setPosts(post);
-    // console.log(post);
-  };
 
   const handleDelete = async (id) => {
     await deletePost(id);
@@ -36,7 +32,6 @@ export default function PostComponent() {
   };
 
   const handleCreate = async () => {
-
     if (!title || !body) {
       alert("Please enter title and body");
       return;
@@ -60,7 +55,6 @@ export default function PostComponent() {
         <button onClick={handleCreate}>Create</button>
       </div>
 
-
       <div>
         <h1>Blog Posts</h1>
         {posts.map((post) => {
@@ -70,7 +64,7 @@ export default function PostComponent() {
                 {post.id} . {post.title}
               </h3>
               {post.body}
-              <button onClick={() => fetchPost(post.id)}>Detail</button>
+              <Link to={`/api/${post.id}`}  state={{ post }}>View Details</Link>
               <button onClick={() => handleDelete(post.id)}>Delete</button>
             </div>
           );
