@@ -1,19 +1,18 @@
 import { useLocation } from "react-router-dom";
 
 export default function PostDetail() {
-  // Get the post data passed from the Link
   const { state } = useLocation();
   const post = state?.post;
 
   return (
-    <div>
-      <h1>Blog Detail</h1>
+    <div className="flex flex-col gap-5 p-7 m-10 bg-amber-100">
+      <h1 className="text-3xl font-bold">Blog Detail</h1>
       {post ? (
         <>
-          <h3>
+          <h3 className="mt-3 font-bold text-xl">
             {post.id}. {post.title}
           </h3>
-          <p>{post.body}</p>
+          <p className="mt-3">{post.body}</p>
         </>
       ) : (
         <p>Post not found</p>
